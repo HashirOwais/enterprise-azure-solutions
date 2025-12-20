@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'app-service-demo/**'
+      - '.github/workflows/main_appsvcdemo.yml' # Run if this file changes
   workflow_dispatch:
 
 jobs:
@@ -24,7 +27,7 @@ jobs:
           dotnet-version: '10.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build app-service-demo/app-service-demo --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
@@ -62,4 +65,5 @@ jobs:
           app-name: 'appsvcDemo'
           slot-name: 'Production'
           package: .
+
           
