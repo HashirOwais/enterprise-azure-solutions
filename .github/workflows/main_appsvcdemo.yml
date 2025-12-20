@@ -15,6 +15,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app-service-demo/app-service-demo
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -27,7 +30,7 @@ jobs:
           dotnet-version: '10.x'
 
       - name: Build with dotnet
-        run: dotnet build app-service-demo/app-service-demo --configuration Release
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
@@ -67,3 +70,4 @@ jobs:
           package: .
 
           
+
